@@ -12,7 +12,7 @@ export const AuthMiddleware = async (req: Request, res: Response, next: Function
                 message: 'unauthenticated'
             });
         }
-        req['user'] = await User.findOneBy({id: payload.id})
+        req['user'] = await User.findOne({ where: { id : parseInt(payload.id) }, relations: ['role', 'role.permissions']});
         next();
     } catch (e) {
         return res.status(401).send({

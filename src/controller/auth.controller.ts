@@ -17,13 +17,14 @@ export const Register = async  (req: Request, res: Response) => {
             }
         )
     }
-    const { first_name, last_name, email, password:pass} = body; 
+    const { first_name, last_name, email, password:pass, role_id} = body; 
     
     const user_save = User.create({
         first_name : first_name,
         last_name : last_name,
         email : email,
-        password : await bcryptjs.hash(pass, 10)
+        password : await bcryptjs.hash(pass, 10),
+        role : role_id
     });
     
     const {password, ...user} = await user_save.save();

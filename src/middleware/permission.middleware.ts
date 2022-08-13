@@ -4,7 +4,6 @@ import {User} from "../entity/user.entity";
 export const PermissionMiddleware = (access: string) => {
     return (req: Request, res: Response, next: Function) => {
         const user: User = req['user'];
-
         const permissions = user.role.permissions;
 
         if (req.method === 'GET') {
